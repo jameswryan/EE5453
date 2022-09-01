@@ -1,0 +1,64 @@
+Text notes for EE5453, Intro to Computer and Network Security
+Lecture 1
+
+
+Last time: 
+    Security Policy vs Enforcement vs Implementation
+                what        how        code
+    
+    Enforcement <-> Mechanism
+    
+    Many to Many relationships between each of these.
+    
+    
+
+Simple computer network:
+    
+                    ethernet cable
+    JPL (NIC)  --------------------- (NIC) BB
+    MAC ADDR 0                       MAC 1
+
+    We can send messages from one NIC to another by modulation on the wire.
+    We can write programs that talk to the NICs and implement a chat program between BB and JPL.
+    
+    The cable sits out in the open, so it is a Public Channel.
+    
+    
+    Attacks:
+        0. Cut the cable
+        1. Read data off of the cable
+        2. Modify data on the cable
+        3. Jam the channel
+    
+    
+    0 and 3 are attacks against Availability.
+    
+    1 is an attack against Confidentiality.
+    
+    2 is an attack against Integrity.
+    
+    The CIA triangle is a classic paradigm for computer security.
+    
+    
+    
+    
+    
+Crypto Basics:
+    Alice and Bob are good guys who want to talk to each other.
+    Trudy/Eve/Mallory is the generic intruder.
+    
+    Cryptology - art and science of making and breaking secret codes
+    Cryptography - making secret codes
+    Cryptanalysis - breaking secret codes
+    Crypto - all of the above (and more!)
+    
+    
+    
+         
+    
+    
+    
+    
+
+
+

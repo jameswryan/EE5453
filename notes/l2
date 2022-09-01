@@ -1,0 +1,42 @@
+Text notes for EE5453, Intro to Computer and Network Security
+Lecture 2
+
+
+Last time:
+    Built pretend computer network
+    Discussed desired security properties
+    Introduced Confidentiality, Integrity, and Availability
+    
+    Introduced basics of crypto
+    
+    
+Discussed Symmetric & Asymmetric Cryptosystems
+Symmetric - same key
+Asymmetric - different keys
+This class uses Cipher <-> Cryptosystem
+
+Kerckhoff's Principle:
+    The entire cryptosystem (except for the key) is available to the attacker.
+    
+
+Ceaser Cipher:
+    Monoalphabetic substitution cipher, SBOX is alphabet 'shifted' by 3 letters.
+
+Can do similar, using shift amount as key.
+Low entropy key, so easy to try all keys. (Exhaustive key search, brute force)
+
+Can also try full substitution cipher (map input letter to random output letter).
+Larger key space (>2^88 keys!).
+But the map is always the same, so frequency analysis is possible.
+
+Double Transposition cipher:
+    Permute plaintext to get ciphertext.
+    Key is permutation matrix and which permutations.
+    
+    
+One-Time Pad:
+    Plaintext XOR Key = Ciphertext.
+    Provably perfectly secure.
+    Extremely fragile. (Vulnerable to key reuse, hard to distribute keys.)
+
+

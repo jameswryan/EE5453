@@ -1,0 +1,87 @@
+Text notes for EE5453, Intro to Computer and Network Security
+Lecture 0
+
+
+Outline:
+    
+    (Basic) Cryptography
+    - Midterm (~Oct 11)
+    Network Security
+    Access Control
+    - Final (Dec 6, 11AM-12:50PM, BB 3.01.02)
+    
+    
+No late submissions for assignments
+
+
+Extra Credit:
+    Visit office hours 5+ times for 5 points (total!)
+    Complete course evaluation for 1 point
+    
+    
+
+
+
+Security Policy vs Enforcement vs Implementation:
+    Policy defines what security is; what it means to be secure.
+    Example:
+        If you are in the classroom, you should be registered for this class.
+    Enforcement is _how_ we implement the policy.
+    Example:
+        James enforcement:
+            0. Print ASAP names
+            1. Collect names
+            2. Check names
+        Elijah enforcement: (Assume classrooms are equipped with swipe access, which is connected to ASAP)
+            0. Student swipes at door
+            1. Door allows/disallows entry
+        Ricardo enforcement:
+            0. Prof stands at door
+            1. Asks for proof of registration
+        David enforcement: (Improves James')
+            0. Print ASAP names
+            1. Collect IDs
+            2. Check IDs
+        Anindita (Improves Elijah's):
+            0. Use fingerprint
+            1. Door allows/disallows entry
+            
+            
+        - There are many possible enforcements for the same policy
+        - each enforcement will have advantages/disadvantages
+        Example:
+            James:
+                + simple, cheap
+                - easy to lie
+            Elijah:
+                + simple, less trust            
+                - tailgating possible, costs more
+            Ricardo:
+                + easy on prof, stateless
+                - easy to fake screenshot, hard on students
+            David:
+                + harder to fake than James, simple, quick
+                - laborious
+            Anindita:
+                + hard to fake
+                - expensive
+                
+        'Best' depends on what we mean by best.
+        
+        
+        Perfect enforcement (enforcing all and only the policies) isn't feasible, so we typically stop at 'good enough'.
+        
+        Implementation - Actual deployed system.
+        
+        A policy can have multiple enforcements.
+        An enforcement can satisfy multiple policies.
+        An enforcement can have multiple implementations.
+        A single implementation can implment multiple enforcements.
+        
+        
+
+        
+            
+ 
+
+
