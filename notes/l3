@@ -1,5 +1,76 @@
 Text notes for EE5453, Intro to Computer and Network Security
-Lecture 2
+Lecture 3
 
 
 Last time:
+    (more) Basic Crypto
+    Shift ciphers, monoalphabetic substitution ciphers
+    Key length vs Key Space
+    Double Transposition Cipher
+    One-Time Pad 
+    
+    
+    
+Codebook - Book containing outputs of Random Oracle
+Encrypt 'hello' by looking up codeword ('19875'), decrypt 19875 by looking up codeword ('hello')
+
+
+(Some) Types of crypanalysis attacks:
+    Ciphertext only attack
+    Known Plaintext
+    Chosen Plaintext
+ 
+
+Real-World Crypto:
+    Stream vs Block ciphers (bit-by-bit vs chunk encryption)
+
+
+Stream cipher design:
+    Key goes into keystream generator, take one bit from keystream and XOR with plaintext (synchronous stream cipher)
+    Can also mix ciphertext into keystream generator (asynchronous stream cipher)
+    
+    synchronous stream cipher, keystream only depends on key
+    asynchronous ||                      depends on key & previous ciphertext bit
+    
+    
+    
+Confusion & Diffusion:
+    Principles proposed by Claude Shannon
+
+Confusion - Relationship between key and ciphertext should be 'confusing' for an attacker, i.e., complex.
+Diffusion - Concerns relationship between ciphertext and plaintext: if one plaintext bit changes, output bit changes with probability 0.5.
+
+
+
+Block cipher design:
+    One early design came from Horst Feistel, and IBM cryptographer.
+    Called Feistel cipher, find diagram on Wikipedia.
+    
+    Feistel Cipher Encryption:
+    Plaintext block P = <L0, R0>, Key=K, F is round function, Ki is ith round key
+    0: Split P = L0,R0
+    1: For each Round i=1..n
+        Li = R(i-1)
+        Ri = L(i-1) XOR F(R(i-1), Ki)
+        Compute Li,Ri
+    2: Ciphertext C = Ln, Rn
+    
+    Feistel Cipher Decryption:
+    0: Split C = Ln,Rn
+    1: For each round i=n..1
+        R(i-1) = L(i)
+        L(i-1) = Ri XOR F(Li, Ki)
+    2: Plaintext P = L0,R0
+        
+        
+    This is secure iff F is a 'good' round function
+    
+    
+    
+    DES, data encryption standard, was a Feistel Network Block Cipher developed by IBM & secretly, the NSA.
+    Look at slide 12 for round diagram
+    
+
+    
+    
+    
