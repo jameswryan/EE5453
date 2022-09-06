@@ -1,0 +1,57 @@
+Text notes for EE5453, Intro to Computer and Network Security
+Lecture 4
+
+
+Last time:
+	Basic Symmetric Crypto
+	Stream Ciphers vs Block Ciphers
+	Feistel Ciphers & DES
+
+DES doesn't have many practical attacks, and there doesn't appear to be a backdoor.
+
+
+In 1996, NIST setup the AES comptetiion to design the Advanced Encryption Standard.
+
+Rijndael was the winning cipher.
+
+
+Rijndael:
+	Block Cipher
+	128-bit block size, 128,192,256 bit keys
+	
+Other block ciphers:
+	IDEA
+	Blowfish
+	RC6
+	TEA
+
+
+See slide 17 for block cipher notation
+
+
+block cipher modes of operation:
+	Block ciphers work with only a single block.
+	But plaintexts usually consist of multiple (n) blocks.
+
+	ECB mode encrypts every block with the same key.
+	But, since identical plaintext blocks are encrypted to identical ciphertext blocks, 
+
+	CTR mode encrypts a nonce & counter with the same key, then XORs the output with the plaintext (This is a stream cipher)
+	
+	CBC mode chains ciphertext blocks together.
+		A plaintext block Pi is XORd with ciphertext block C(i-1), then encrypted under key K to get ciphertext block Ci
+		C(-1) is the initialization vector. This needs to be random, but doesn't need to be confidential.
+		Encryption:
+			C(n) = E(P(n) ^ C(n-1), K)
+			C(0) = E(P(n) ^ IV, K)
+	
+		Decryption:
+			P(n) = D(C(n), K) ^ C(n-1)
+			P(0) = D(C(0), K) ^ IV
+		
+		If a bit in C(i) is flipped, P(i) will be unrecoverable, *and* _the same bit_ in P(i-1) will flip!
+		(This can be exploited to control the decrypted plaintext!)
+		
+		
+		
+
