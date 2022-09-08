@@ -1,0 +1,55 @@
+Text notes for EE5453, Intro to Computer and Network Security
+Lecture 5
+
+Last time:
+	AES
+	Block Cipher modes of operation:
+		ECB 
+			bad
+			periodicity in plaintext <-> periodicity in ciphertext)
+		CBC 
+			good
+			perodicity in plaintext </> periodicity in ciphertext.
+			Does need additional data (IV), but this doesn't need to be protected
+			
+
+Multiple Encryption:
+	DES is pretty good, but has a small keysize
+	How could we increase the effective keysize?
+	Multiple Encryption!
+
+	Double DES (or 2DES): 
+		C = DESEncrypt(I, K1)
+		I = DESEncrypt(P, K0)
+	
+	If attacker has P and C, he can recover the keys in 2^(56)*2 trial encryptions and 2^(56) * 2 stored intermediates with a Meet In The Middle attack:
+		Make 2^56 trial encryptions of P, and 2^56 trial decryptions of C.
+		Then exactly one result will match, and this reveals the correct keys.
+		
+	What about 3 encryptions? 
+	Vulnerable to MITM attack, key recovery in 2^(112) + 2^(56) encryptions with the same number of stored intermediates.
+	
+	We can use 2 DES keys (112 bits of key) and still get 112 bits of effective key size:
+	3DES:
+		C = DESEncrypt(J, K0)
+		J = DESDecrypt(I, K1)
+		J = DESEncrypt(P, K0)
+		
+	MITM isn't advantageous, b/c an attacker still needs 2^(112) trial encryptions.
+	Could do 3 encrypts with 2 keys, but 3DES is the same as DES if K0=K1, so for backwards compatability 3DES was standardized.
+			
+
+Integrity:
+	All symmetric key cryptosystems seen so far only provide confidentiality.
+	So Bob doesn't detect if Trudy modifies the ciphertext.
+	So, we use AEADs (Authenticated Encryption with Associated Data).
+	
+	AEADs append a MAC to the ciphertext (or plaintext if confidentiality isn't needed).
+	The MAC is keyed, so Alice and Bob need a shared secret for this to work.
+	MACs are usually implemented with a keyed hash function.
+	Bad MACs (like SHA256(K||P)) are vulnerable to length extension attacks.
+
+		
+	
+		
+	
