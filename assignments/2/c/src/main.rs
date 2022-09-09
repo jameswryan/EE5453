@@ -2,15 +2,18 @@ use std::fs;
 use std::io::prelude::*;
 use std::net::{IpAddr, Ipv4Addr, SocketAddr, TcpStream};
 
-use serde::Deserialize;
-use xsalsa20poly1305::{
-    aead::{Aead, KeyInit},
-    Key, Nonce, XSalsa20Poly1305, KEY_SIZE, NONCE_SIZE,
+use chacha20poly1305::{
+    aead::{Aead, KeyInit, Payload},
+    ChaCha20Poly1305, Key, Nonce,
 };
 
 // Alias all cryptography behind 'Crypto<TYPE>'
 // so it can be changed easily
-type CryptoAead = XSalsa20Poly1305;
+type CryptoAead = ChaCha20Poly1305;
+
+// chacha20poly1305 crate doesn't provide key & nonce sizes
+const KEY_SIZE: usize = 32; // ChaCha20Poly1305 uses 256-bit key
+const NONCE_SIZE: usize = 12; // ChaCha20Poly1305 uses 96-bit nonce
 
 use clap::Parser;
 
@@ -31,15 +34,6 @@ struct Cli {
     /// Port to connect to.
     #[clap(short, long, value_parser, default_value_t = 0xBEEF)]
     port: u16,
-}
-
-/// Wrapper to hold filename and file contents
-#[derive(Clone, Debug, Deserialize)]
-struct FileWithName {
-    /// Name of the file
-    name: String,
-    /// File contents
-    contents: Vec<u8>,
 }
 
 /// Parse hex string into key for CryptoAead
@@ -90,29 +84,27 @@ fn main() -> std::io::Result<()> {
         buf[NONCE_SIZE..].into(),
     );
 
-    // Decrypt buffer
+    // Authenticate & decrypt payload
     let cipher = CryptoAead::new(&key);
-    let plaintext = match cipher.decrypt(&nonce, ciphertext.as_slice()) {
+    // Server uses filename as aad, so must we
+    let filename = args.file;
+    let file_bytes = match cipher.decrypt(
+        &nonce,
+        Payload {
+            msg: &ciphertext,
+            aad: filename.as_bytes(),
+        },
+    ) {
         Ok(pt) => pt,
         Err(e) => {
             panic!("ERROR in Decryption: {e}");
         }
     };
 
-    let file: FileWithName = match serde_json::from_slice(&plaintext) {
-        Ok(f) => f,
-        Err(e) => {
-            panic!("ERROR in deserialization: {e}");
-        }
-    };
-
-    // If the name of the file we got doesn't match what was requested, error and _don't_ write to filesystem
-    if file.name != args.file {
-        panic!("ERROR Received different filename than requested!");
-    }
+    // Payload has been authenticated, safe to use additional data & plaintext
 
     // Write decrypted file to filesystem
-    fs::write(file.name, file.contents)?;
+    fs::write(filename, file_bytes)?;
 
     Ok(())
 }
