@@ -1,0 +1,2 @@
+This is a text file the client can request from the server.
+If you're a client reading this, everything is working!
