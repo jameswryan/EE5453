@@ -1,0 +1,45 @@
+Text notes for EE5453, Intro to Computer and Network Security
+Lecture 6
+
+Last time:
+	Multiple Encryption & Meet in the Middle Attacks
+	2DES & 3DES
+	MACs
+
+
+Integrity w/ Symmetric Key Cryptography
+
+One approach for MACs:
+	Use CBC mode.
+	Send only last block of ciphertext (called Residue) as MAC.
+		Last block is dependent on every block of plaintext, so if any piece of plaintext changes residue changes as well.
+
+	This doesn't work if we want to encrypt at the same time, because an attacker can preserve selective ciphertext blocks while modifying others.
+
+
+We can get both C&I by computing MAC w/CBC and a different key than for confidentiality.
+Only the residue for the integrity part is sent.
+
+
+Public Key Cryptography
+Why? - Distributing keys is hard, and requires a secure channel.
+
+History:
+	1970 - Ralph Merkle invents PK construction as part of an undergraduate project at UCB.
+	1976 - Whitfield Diffie & Martin Hellman publish 'New Directions in Cryptography'.
+	1978 - RSA Algorithm
+	1982 - Merkle publishes "Secure Communication Over Insecure Channels"
+	1985 - Tahar ElGamal proposes Finite Field DH
+	1997 - GCHQ declassifies that James Ellis discovered Diffie-Hellmans construction in 1969.
+	???? - Malcolm Williamson & Clifford Cocks (GCHQ) had discovered RSA before
+
+
+
+PKC works with one-way functions, 
+	invertible functions which are:
+		'easy' to compute
+		but 'hard' to invert
+		unless a secret is known, in which case it is easy to invert
+
+
+
