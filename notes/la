@@ -1,0 +1,93 @@
+Text notes for EE5453, Intro to Computer and Network Security
+Lecture a
+
+RSA Algorithm
+Invented by Ron Rivest, Adi Shamir, & Leonard Adleman
+
+Very popular encryption algorithm.
+
+Based on the hardness of prime factorization.
+	Given N, the product of two large primes p&q, find p&q.
+	This is quite difficult for large enough primes.
+	
+	
+Phi is the Euler Totient Function.
+Phi(A) is the number of integers less than N that are coprime with N.
+
+RSA:
+	Generate large primes 'p' and 'q'
+	Compute N = p*q
+	Compute Phi(N) = (p-1)(q-1)
+	Choose 'e' coprime with Phi(N)
+	Find 'd' === e^-1 (mod Phi(N))
+	Public key is <e, N>
+	Private key is d
+	Destroy (forget) p & q
+	
+Encryption:
+	M: message
+	C: ciphertext
+	C === M^e (mod N)
+Decryption:
+	M: message
+	C: ciphertext
+	M === C^d (mod N)
+	
+	
+Why does this work?
+
+A message M is encrypted to produce ciphertext C:
+	C === M^e (mod N)
+The ciphertext is decrypted to produce message M':
+	M' === C^d (mod N)
+If M' === M (mod N), then this works.
+
+M' === M^(ed) =?= M (mod N)
+
+Euler's theorem:
+	If x is coprime with N, then
+	x^(Phi(N)) === 1 (mod N)
+	
+We know that ed === 1 (mod N).
+So 
+ed = k (Phi(N)) + 1 
+   = k(p-1)(q-1) + 1
+ed - 1 = k(p-1)(q-1)
+
+=>
+M^(ed) = M^(ed-1) * M
+	   = (M^Phi(N))^k * M
+(by Euler's theorem, iff M is coprime with N)
+	 === 1 * M (mod N)
+	 === M (mod N)
+	
+So everything works out iff M is coprime with N
+
+How many values for M are _not_ coprime with N?
+
+How many M < N?
+	N = pq, so pq M.
+How many coprime with M?
+	Phi(N) = (p-1)(q-1)
+So there are N - Phi(N) = p+q-1
+
+If an attacker can factor N into pq, then he can find the private key d (because e is public) through finding Phi(N).
+
+RSA notation:
+	{}_A: RSA encrypt using Alice's public key 
+	[]_A: RSA decrypt using Alice's private key 
+	
+	
+	
+	
+Non-Repudiation:
+
+RSA is symmetric, so if Alice computes {M}_A, anyone can compute [{M}_A]_A = M,
+and only Alice could have computed the right intermediate step.
+
+This means that there's a way for Alice to 'sign' a message M and produce a signature S:
+	If {S}_A is the message, then only Alice could have produced S because only Alice can compute [M]_A.
+
+
+
+

@@ -1,0 +1,39 @@
+Text notes for EE5453, Intro to Computer and Network Security
+Lecture 8
+	
+Diffie-Hellman
+
+Based on security of Discrete Log Problem over Fp*
+
+DH:
+	1. Alice & Bob agree on (public) generator 'g' (mod p)
+	2. Alice picks secret 'a' in Fp* (needs to be careful with choice of a)
+		2a. Bob similarly picks secret 'b'
+	3. Alice computes A === g^a (mod p)
+		3.a Bob similarly computes B === g^b (mod p)
+	4. Alice & Bob share A & B
+	5. Alice computes B^a (mod p) === (g^b)^a (mod p)
+		5a. Bob similarly computes A^b (mod p)
+	6. A^b === B^a === g^(ab) (mod p). This is a shared secret between Alice & Bob.
+
+Because DLP is hard, g^a reveals ~no information about a, and g^b reveals ~no information about b.
+Additionally, there isn't a way to comput g^(ab) from g^a & g^b
+
+Example:
+	p = 941, g = 627
+	a = 347, A = 390 === 627^347 (mod 941)
+	b = 781, B = 691 === 627^781 (mod 941)
+	g^(ab) = 470 is shared secret.
+	
+It is unknown if the security of DH reduces to DLP, but no other public cryptanalysis has been found.
+
+Diffie-Hellman is vulnerable to a MitM attack, where Trudy intercepts all communications.
+Trudy can establish seperate shared secrets with Alice & Bob, and Alice & Bob are unaware their communication is relayed through Trudy.
+This is an unsolvable problem (in-band!).
+
+It is possible to use Diffie-Hellman to establish an ephermal key if a long-term shared secret is available.
+
+
+
+
+	

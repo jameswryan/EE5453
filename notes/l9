@@ -1,0 +1,28 @@
+Text notes for EE5453, Intro to Computer and Network Security
+Lecture 9
+	
+El-Gamal
+
+
+Public-Key Encryption Scheme based on security of DLP.
+Proposed by Taher El-Gamal.
+
+Alice: 
+	choose 1 <= a <= p-1
+	compute A === g^a (mod p)
+	Publish A
+
+Bob:
+	wants to send plaintext 'm' to Alice
+	select _random_ key 'k'
+	computes c1 === g^k (mod p) & c2 === m* A^k (mod p)
+	Send c1 & c2 to Alice
+
+Alice:
+	compute (c1^a)^-1 * c2 (mod p)
+	this is m
+
+
+
+
+
