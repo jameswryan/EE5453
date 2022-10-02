@@ -1,0 +1,86 @@
+Text notes for EE5453, Intro to Computer and Network Security
+Lecture b
+
+
+Hash Functions
+
+RSA signatures over large messages are large and expensive to compute.
+Instead, compute the signature of h(M).
+
+h(M) is a cryptographic hash of M.
+
+Hash functions should have the following properties:
+* Compression - output length is fixed for any size input
+* Efficiency - h(x) should be 'easy' to compute for any x
+* One-Way (first preimage resistance) - given h(x), it is infeasible to find x
+* Weak Collision Resistance (second preimage resistance) - given x & h(x), it is infeasible to find y=/=x such that h(y)=h(x)
+* Strong Collision Resistance (collision resistance) - infeasible to x,y=/=x such that h(x)=h(y)
+
+Because hash functions have fixed output length, many collisions exist (by pidgeonhole principle), but it is hard (birthday bounded) to find them.
+
+
+Birthday Problem:
+	How many people can be in a room before the probability that two share a birthday is >50%?
+	
+	With 366 people, P = 1
+	With N<366 people, P(shared) = 1-(364/365)*(363/365)*...*(365-N/365)
+								 ~ 23
+								 ~ sqrt(365)
+								
+	This is exactly the collision problem for cryptographic hash functions
+	So, hashes have sqrt(2^N)= 2^(N/2) resistance to collisions
+	
+
+Non-cryptographic hash (1)
+Data X = (X0,...,Xn-1) each Xi a byte
+Define h(X) = X0 + X1 + X2 ... where + is 8-bit addition (addition mod 256)
+This isn't secure:
+	Suppose we have h(X)
+	We can add 1 byte to any other message Y to make h(Y') = h(X)
+	We can find the byte to add by computing h(X)+(-h(Y))
+	So second preimage attacks are possible in constant time 
+
+Non-cryptographic hash (2)
+Data X = (X0,...,Xn-1) each Xi two bytes
+Define h(X) = nX0 + (n-1)X1 + ... 1Xn-1
+This is part of the 'rolling checksum' used in rsync
+Slightly harder to find second preimages, but since state is only 16 bits collisions can be generated in O(2^8) time
+
+Non-cryptographic hash (3)
+A cylic redundancy check (CRC) uses polynomial long division to compute an error-correcting checksum of data
+This is good for detecting burst errors when transmitting data
+But, it's easy to construct collisions, so it's not a good cryptographic hash
+It was used as a hash in WEP, which is part of why WEP is so broken.
+
+Some cryptographic hash functions
+
+MD5 - designed by Ron Rivest
+	Fast
+	128 bit output (so 2^64 birthday bound)
+	Now easy to generate collisions, do not ever use
+
+SHA-1/2 - Merkle-Damgard constructions, like MD6
+	SHA1 has 160 bit output
+		And is broken for collision resistance, don't ever use SHA1
+
+	SHA2 is still used, but it's best to use SHA2-512/256 to avoid length extension attacks.
+	
+SHA-3 - designed by Joan Daemen (AES designer)
+	Keccak, sponge construction
+	Extremely high security margin
+	Cool, provably secure, very vulnerable to side channel analysis & slow in software
+	Fast in hardware though
+	
+Avalanche effect:
+	Changing 1 bit of input should change each bit of output with probability 1/2
+	
+HMAC:
+	Hash-based Message Authentication Code
+	Keyed hash so can be used in AEAD scheme
+	
+
+
+
+
+
+
