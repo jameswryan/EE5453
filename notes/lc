@@ -1,0 +1,56 @@
+Text notes for EE5453, Intro to Computer and Network Security
+Lecture c
+
+Last two weeks (online):
+	Intro to Public Key Crypto
+		Modular Arithmetic
+	(Finite Field) Diffie-Hellman Key Exchange (DLP)
+	El-Gamal (DLP)
+	RSA (integer factorization)
+	Hashing
+	
+Today:
+	Review of last four weeks
+	
+Thursday:
+	Secret Sharing
+	Midterm Review
+
+Next Tuesday:
+	Take Home Exam
+	
+	
+
+Hash Functions:
+	h(.)
+	Input is of arbitrary length
+	Output is of fixed length
+	
+	Cryptographic hash functions should have the following properties
+	* Compression - fixed length output
+	* Efficiency - fast
+	* One-Way (first preimage) - given h(x), difficult to find x
+	* Weak Collision Resistance (second preimage) - given x & h(x), hard to find y=/=x where h(y)==h(x)
+		Attacker controls only y
+	* Strong Collision Resistance (collision resistance) - hard to find x, y=/=x where h(x)==h(y)
+		Attacker controls x & y
+	
+Merkle-Damgard Constructions:
+	A popular method for building cryptographic hash functions based on a compression function.
+	Split the message into blocks B_(1...n) of equal size
+	Given a one-way compression function f
+		f_i takes B_i and f_(i-1) as inputs
+		f_0 takes B_0 and an IV as input
+	f_n is the hash
+	
+One-Way Compression Functions (as used in MD constructions):
+f takes two n-bit inputs X ( previous ) & Y and produces an n-bit output
+f is one-way iff it is hard to find X&Y given f(X,Y)
+Block ciphers are pretty good one-way functions
+
+Davis-Meyer:
+	Use block cipher for f.
+	Let message block be key, and previous f be plaintext
+	Then fi = f(Bi, fi-1) = E(K=Bi, fi-1) ^ fi-1
+	
+
