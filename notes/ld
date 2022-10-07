@@ -1,0 +1,99 @@
+Text notes for EE5453, Intro to Computer and Network Security
+Lecture d
+
+Secret Sharing:
+
+Suppose we have an encrypted document, encrypted with key K
+Can we devise a system where Alice _and_ Bob _both_ need to be present to decrypt the document?
+
+Here's a scheme by Shamir - called Shamir's Secret Sharing:
+
+	Consider a line in R^2 whose y-intercept is a secret S  
+	Choose any two points on the line, p1, p2
+	Give Alice (WLOG) p1 and Bob p2
+	Neither Alice nor Bob can individually find S, but both together can find it
+	If we want more people to be included, we can give them other points on the line
+	Then as long as two people are present, the secret can be found
+	
+	This idea generalizes to other polynomials, since in R^2 a polynomial of degree 'd' is uniquely defined by d+1 points.
+	So we can build 'm out of n' schemes by selecting a polynomial of degree m+1 and giving out n 'shares'.
+
+
+Public Key Infrastructure:
+How do we know that Alice's public key belongs to Alice, with out talking to Alice directly over a secure channel?
+Suppose we have a trusted person 'Edward'. 
+
+Edward (the CA) has a trusted, known public key.
+Edward also promises to not behave 'badly'.
+
+Then Alice & Bob can go to Edward, and provide their public keys.
+Edward can verify that Alice owns the private key corresponding to the provided public key by encrypting a nonce with the public key
+If Alice can decrypt the nonce, she can tell Edward what it was, proving that she owns the keypair.
+Then Edward can cryptographically sign a message that tells everyone that he verified that a particular public key actually belongs to Alice.
+Because everyone trusts Edward, and knows Edward's public key, everyone can now trust that the certificate signed by Edward is valid.
+
+
+
+Overview of Class So Far:
+	0. Policy vs Mechanism
+	1. Classic Crypto
+		ceaser cipher
+		double transposition cipher
+		one-time pad
+	2. Symmetric-Key Crypto
+		confusion/diffusion
+		stream ciphers (synchronous/asynchronous)
+		block ciphers
+			feistel networks
+			des
+			brute force attacks
+				(keysize vs keyspace)
+			aes
+			multiple encryption
+				mitm
+				3des
+		integrity
+			cbc mac
+		modes of operation
+			cbc
+			cbc w/ cbc mac
+	3. Public Key Crypto
+		number theory
+			modular arithmetic
+			finite fields
+			residue classes
+			units in a finite field
+		diffie-hellman key exchange
+			discrete log problem
+			mallory-in-the-middle
+			authenticated diffie-hellman
+		el gamel
+			encryption w/ dlp
+		rsa
+			integer factorization
+			rsa encryption
+			rsa signatures
+			non-repudiation
+	4. Hashing
+		properties
+		construction
+			merkle-damgard
+		brute force attacks
+			birthday bound
+		keyed hashing
+			hmac
+	5. Public Key Infrastructure
+		certificates
+		certificat{e, ion} authorities
+		
+Exam next Tuesday:
+	open book
+	open notes
+	open internet
+	_no_ collaboration 
+		w/ classmates
+		w/ internet
+	typed solution
+	 
+
+
