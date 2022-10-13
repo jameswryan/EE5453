@@ -1,0 +1,71 @@
+Text notes for EE5453, Intro to Computer and Network Security
+Lecture e
+
+Part Two: Access Control
+
+Authentication: Who is trying to access?
+- Authenticating Humans to a Machine
+- Authenticating Machines to a Machine
+
+Authorization: What are they allowed to access?
+- What are they allowed to do to what they can access?
+Access control typically refers to Authorization, with Authentication as a seperate problem.
+ 
+
+
+Authentication:
+How do we authenticate a human to a machine?
+- Something you know
+	i.e., passwords
+- Something you have
+	i.e., smartcard
+- Something you are
+	i.e., biometrics
+	
+	
+Passwords
+many different things can be passwords
+PIN
+SSN
+Mother's maiden name
+etc...
+
+Passwords are bad (see slide)
+
+Why do we use them?
+- cheap 
+- convenient 
+
+
+Keys vs Passwords
+
+keys:
+Suppose we have 64 bit key
+2^64 possible keys
+On average, 2^63 attempts to guesses
+
+Passwords
+suppose 8 characters, 256 different characters
+256^8 = 2^64 possible passwords
+But, people won't choose a password uniformly randomly
+
+Attacks on passwords:
+Attacker could:
+	- target a particular account
+	- target any account on a system
+	- target any account on any system
+Common attack path
+outsider -> normal user -> administrator
+
+
+How do we store passwords?
+
+Don't store raw passwords!
+Store a hash (ideally using a memory-hard password hashing function such as bcrypt or argon2{id})
+Don't just store the hash of a password, include a random 'salt' along with it, and hash the salt together with the password (to prevent dictionary attacks).
+
+
+
+
+
+
