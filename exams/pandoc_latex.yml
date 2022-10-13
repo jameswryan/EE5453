@@ -1,0 +1,12 @@
+
+header-includes:
+  \usepackage[margin=0.6in]{geometry}
+  \usepackage{fontspec}
+  \usepackage{amsmath}
+  \usepackage{amsfonts}
+  \usepackage{amsthm}
+  \usepackage{amssymb}
+  \usepackage{tikz}
+  \usetikzlibrary{calc}
+  \renewcommand{\bmod} {\textbf{ mod }}
+  
