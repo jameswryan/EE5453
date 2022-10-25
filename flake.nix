@@ -15,13 +15,23 @@
           pkgs = import nixpkgs {
             inherit system overlays;
           };
+          py = pkgs.python3;
+          pyWPkgs = py.withPackages (p: with p; [
+            cryptography
+            mypy
+            python-lsp-server
+            pylsp-mypy
+          ]);
           in 
           with pkgs; {
           devShells.default = mkShell {
             buildInputs = [
               openssl
               pkg-config
-              rust-bin.beta.latest.default
+              rust-bin.nightly.latest.default
+              rust-analyzer
+              
+              pyWPkgs
               
               pandoc
               tectonic
