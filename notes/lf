@@ -1,0 +1,106 @@
+Text notes for EE5453, Intro to Computer and Network Security
+Lecture f
+
+
+Last Time:
+	Access Control
+	Authentication
+		Human-To-Machine
+		Passwords
+
+Biometrics
+'Something You Are'
+ex: fingerprint, facial recognition, speech recognition, gait, handwriting, etc.
+
+
+'Something You Have'
+Phone 
+Car key
+Laptop
+Smartcard
+Password Generator (RSA SecurID)
+
+
+Multi-factor Authentication
+Require more than one of:
+	something you know, 
+	something you have
+	something you are
+
+Authentication Protocols:
+Machine-To-Machine Protocols
+
+
+Protocols:
+human protocols 
+	ex. rules followed in class
+network protocols
+	ex. TCP/IP, HTTP, FTP
+security protocols
+	ex. SSL/TLS, IPSec, Kerberos
+	
+protocols can have subtle flaws
+Many protocols have design-level flaws
+	IPSec, GCM, WEP
+many implementations have flaws
+	OpenSSL, IE SSL
+	
+we have a notion of an 'ideal' security protocol
+
+efficient
+not fragile
+	design for attack!	
+	
+	
+simple security protocols
+
+'secure entry to NSA'
+1. Insert Badge into Reader
+2. Enter Pin
+3. Correct Pin?
+	Yes => Enter
+	No => Get shot by security guard
+	
+'ATM Protocol'
+1. Insert ATM card
+2. Enter Pin
+3. Correct Pin?
+	Yes => get cash
+	No => Machine eats card
+	
+'IFF' (identify friend or foe)
+(see slides)
+
+Authentication
+We always want to authenticate Alice to Bob, and sometimes Bob to Alice (mutual authentication)
+May need to establish 'session key'
+Sometimes other requirements
+	- use only public keys
+	- use only symmetric keys
+	- use only a hash function
+	- anonymity, plausible deniability etc.
+	
+	
+See slides on authentication protocols
+
+
+challenge response
+
+A: I'm Alice
+B: Nonce
+A: h(Alice's password, Nonce)
+
+nonce is the Challenge
+hash is the Response
+nonce prevents replay & ensures freshness
+Alice & Bob know Alice's password
+
+
+we could use crypto instead
+
+symmetric key authentication:
+Kab is the key shared between Alice and Bob
+Challenge & Response must be based on knowledge of shared key
+We should not reveal the key
+We should not allow replay attacks
+

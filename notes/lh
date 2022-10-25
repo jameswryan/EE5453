@@ -1,0 +1,58 @@
+Text notes for EE5453, Intro to Computer and Network Security
+Lecture h
+
+Authentication protocols
+
+Timestamps
+Can add a timestamp (from a monotonically increasing clock) to a message to provide freshness
+This works like a nonce
+But, we don't have a centralized clock, so we have to deal with skew.
+
+Public Key authentication w/ timestamp:
+A -{I'm Alice!, [T,SK]_A}_B-> B
+B -{I'm Alice!, [T+1,SK]_B}_A-> A
+
+If we do encrypt-then-sign, an attacker can steal the session key.
+
+
+
+
+Real Protocols:
+
+Needham-Schroeder
+Goal is Mutual Authentication, establish session key
+Symmetric Keys only
+Uses Key Distribution Center (KDC), which has a trusted channel to every party
+Each party gives their long-term symmetric key to the KDC
+
+For Alice & Bob to mutually authenticate:
+	0: First, Alice sends KDC {N_0, Alice, Bob}
+	1: The KDC sends E(K_A, N_0||K_AB||ticket_B)
+		where ticket_B = E(K_B, A||K_AB)
+
+	2: Then Alice sends Bob {ticket_B, E(K_AB, N_1)} 
+	3: Then Bob sends Alice E(N_1-1||N_2, K_AB)
+	4: Then Alice sends Bob E(N_2-1, K_AB)
+	
+(a) why do we care about N_0?
+	To establish freshness of message 1
+	Suppose K_B is compromised and revoked _only_ at the KDC
+	An attacker can replay message 1, and convince Alice they are Bob, without Bob's knowledge
+(b) why do we include B in message 1?
+	If we didn't, Trudy could modify message 0.
+	Alice now receives instructions to authenticate with Trudy, but thinks they are instructions for authenticating with Bob.
+(c) What if DES in ECB mode was used? (and Nonce is 64 bits)
+	Trudy could modify message 3, and use it in a seperate session to impersonate Bob
+(d) Suppose Alice's key was compromised, and revoked _only_ at KDC
+	Trudy can compromise message 1, and extract ticket_B.
+	This can be used to impersonate Alice in messages 2-4
+	
+Many of these problems are because messages 1 and 2 are not tightly coupled in time.
+This is 'fixed' in Otway-Rees, which we will not cover in class
+	
+A version of Needham-Schroeder using Public Key crypto exists
+
+Kerberos is a version of Needham-Schroeder
+
+
+
