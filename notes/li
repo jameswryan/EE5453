@@ -1,0 +1,34 @@
+Text notes for EE5453, Intro to Computer and Network Security
+Lecture i
+
+
+Last time:
+	Needham-Schroeder
+	
+Today:
+	Kerberos - an instantiation of Needham-Schroeder
+
+
+In an enterprise environment, there are many different services (print, email, compute, file storage) on many different servers.
+Kerberos provides a way to automatically authenticate to each service, if a user can authenticate to a central authentication server.
+
+Kerberos is like NS, using symmetric keys, but with timestamps instead of nonces
+
+
+Kerberos has a KDC with symmetric keys for each user (K_A, K_B, K_C), as well as a KDC key K_KDC known only to the KDC
+
+(see kerberos diagram)
+
+In kerberos, KDC is stateless (doesn't need to store TGT or S_A)
+
+kerberos has 'realms'.
+realms are a single KDC with a set of services.
+
+inter-realm authentication can be done by having the KDCs talk to each other.
+The KDC Alice talks to
+
+
+Zero-Knowledge Proof (ZKP):
+How do we prove knowledge of a secret without revealing the secret?
+
+	
