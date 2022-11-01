@@ -1,0 +1,34 @@
+Text notes for EE5453, Intro to Computer and Network Security
+Lecture j
+
+Zero-Knowledge Proofs
+
+Fiat-Shamir:
+	N = pq
+	S Alice's secret
+	N & V === S^2 (mod N) public
+	
+	See 'fiat-shamir.pdf'
+	
+	If Alice could predict e before computing x, then she would not need to know S.
+	
+	If Alice knows e=0, then just follow the protocol (y does not depend on S)
+	
+	If Alice knows e=1, then compute x = r^2 * v^(-1) (mod N) in step (A).
+	Then in (C) send y === r (mod N), so Bob computes y^2 === r^2 * v^(-1) * v === r^2 (mod N)
+	
+	So, Bob requires that Alice commits to a random x === r^2 (mod N)
+	
+	What are the restrictions on N? What security does that give us for V? What confidence does Bob gain that Alice knows S after each round?
+	
+
+SSL/TLS
+<overview of SSL/TLS>
+<overview of TCP/IP>
+
+
+
+
+	
+
+
