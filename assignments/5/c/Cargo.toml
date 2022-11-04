@@ -1,0 +1,17 @@
+[package]
+name = "c"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+clap = { version = "3.2.20", features = ["derive"] }
+hex = "0.4.3"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+cbc = { version = "0.1.2", features = ["alloc"] }
+rand = { version = "0.8.5", features = ["getrandom"] }
+rsa = { version = "0.7.1", features = ["getrandom", "serde"] }
+sha2 = { version = "0.10.6", features = ["asm"] }
+signature = "1.6.4"
