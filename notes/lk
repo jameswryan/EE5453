@@ -1,0 +1,20 @@
+Text notes for EE5453, Intro to Computer and Network Security
+Lecture k
+
+Last Time:
+	ZKP (Feige-Fiat-Shamir)
+	TCP/IP (& associated stack)
+	SSL intro
+	
+
+<More overview of TCP/IP, description of encapsulation>
+
+SSL/TLS:
+SSL uses a pki to distribute certificates with public keys.
+CAs issue certificates signing the public key of all servers (not necessarily clients).
+
+CRL (Certificate Revocation List) - list of revoked certificate IDs
+
+
+
+
