@@ -1,0 +1,68 @@
+Text notes for EE5453, Intro to Computer and Network Security
+Lecture ll
+
+Last Time:
+  TCP/IP
+  
+(Finally!) SSL/TLS
+
+See ssl.pdf for exchange
+
+Mostly we use TLS to authenticate the server, not to authenticate the client.
+
+'Mutual TLS' can be used to authenticate a client.
+
+
+Some (older) versions of HTTP use multiple connections. 
+TLS can support this via 'Sessions' and 'Connections'
+
+In message (2), Alice sends a session ID.
+
+Then multiple connections can share the same connection.
+
+
+If a session ID exists, Alice can use the session ID in the first message, and a different nonce R_A'
+Then Bob responds with <Session ID, Cipher, R_B'>.
+So message (3) becomes (from Bob to Alice) <h(msgs || "SRVR" || K)>
+And message (4) is (from Alice to Bob) <h(msgs || "CLNT" || K)>
+The pre-master secret 'S' is reused from the previous connection in the session
+
+
+SSL is implemented as part of HTTP, an Application-layer Protocol.
+Typically then, each application using HTTP must also implement SSL.
+And so, only the HTTP data is protected by TLS.
+What if we wanted to protect the HTTP header, and the TCP header, and the IP header, and the MAC header? 
+This is the use case for IPSec, a suite of protocols.
+
+
+IPSec works between two TCP/IP stacks.
+
+IPSec has two components:
+IKE: the Internet Key Exchange is a suite of protocols for mutual authentication & key exchange
+ESP|AH: Encapsulating Security Payload or Authentication Header
+
+IKE establishes a shared secret.
+ESP provides confidentiality & integrity of IP Packets.
+AH provides integrity of IP Packets.
+
+IKE has two phases:
+
+Phase 1: IKE-SA (Security Association)
+  Heavier, like SSL Session
+  4 key options - Public Key (Original), Public Key (Improved), Digital Signature, Symmetric Key
+  Each option can run in 'main' or 'aggressive' modes
+
+
+Phase 2: IPSec-SA
+  Lighter, like SSL Connection
+  ESP & AH can each run in either Transport or Tunnel modes
+  Host-to-Host 
+  Firewall-to-Firewall or Host-to-Firewall
+
+
+
+
+
+
+
+
