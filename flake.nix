@@ -28,7 +28,7 @@
             buildInputs = [
               openssl
               pkg-config
-              rust-bin.nightly.latest.default
+              rust-bin.nightly."2022-11-05".default
               rust-analyzer
               
               pyWPkgs
