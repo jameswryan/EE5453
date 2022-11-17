@@ -8,6 +8,20 @@ Last Time:
 
 See ssl.pdf for exchange
 
+Exchange:
+```mermaid
+sequenceDiagram
+  participant Alice
+  participant John
+  Alice ->> Bob: "Can we talk?", <Ciphers>, R_A
+  Bob ->> Alice: <Cert>, <Cipher>, R_B
+  Alice ->> Bob: {S}_{Bob}, E(h(msgs || "CLNT" || K),K)
+  Bob ->> Alice: h(msgs||"SRVR"||K)
+  Alice --> Bob: Protected by K
+
+```
+
+
 Mostly we use TLS to authenticate the server, not to authenticate the client.
 
 'Mutual TLS' can be used to authenticate a client.

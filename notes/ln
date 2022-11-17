@@ -1,0 +1,48 @@
+Text notes for EE5453, Intro to Computer and Network Security
+Lecture ln
+
+Last time:
+	IPSec
+	
+	
+Today:
+	Authorization Problem
+	
+	
+
+The Authorization/Access Control Problem
+	Once Alice has authenticated to Bob, how does Bob determine what Alice is allowed to access?
+	
+
+Some AC Notions:
+Users have unique user ids within the system that serve as their representations in the system.
+Subjects are programs/processes running on behalf of users on the system.
+Objects are resources that need to be protected.
+Rights are the types of access users have to objects. (read, write, execute, owner, credit, debit, etc.)
+
+Let U the set of Users, S the set of Subjects, O the set of Objects, & R the set of rights.
+
+
+Discretionary Access Control (DAC):
+"Owners" of resources determine who can access resources.
+
+	Access Control Matrix (ACM):
+		A matrix whose rows are S, columns are {S,O}, & elements are Rights a Subject has on an Object or other Subject.
+	
+	State machine:
+		An ACM is the state of access control at one point in time.
+		We want to know if we can move from any arbitrary state to any other state. 
+		The general problem is undecideable (HRU safety)
+	
+	ACL:
+		break ACM of each state into columns.
+		(store rights w/ resources)
+	
+	Capability List:
+		Break ACM of each state into rows.
+		(list rights w/ subjects)
+
+
+Mandatory Access Control (MAC):
+The system/operator determines who can access resources.
+

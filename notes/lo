@@ -1,0 +1,80 @@
+Text notes for EE5453, Intro to Computer and Network Security
+Lecture o
+
+Last time:
+	Access Control
+	MAC & DAC
+	Users, Subjects, Objects, Rights, Policies (Does S have right R on O?)
+	DAC:
+		ACM
+		ACLs & Capabilities (rows/columns of ACM)
+		Safety Problem (Equivalent to Halting Problem)
+
+Today:
+	DAC
+
+
+
+
+Mandatory Access Control - System policy determines who can access resources
+
+One type of MAC could be to use a static ACM that does not allow updates.
+This is hard to work with.
+
+
+Bell-Lapadula Model (BCP):
+
+Users: Alice, Bob, Cathy
+
+Files (objects): file1, file2, file3
+
+Users have different clearances {TS, S, C, U}
+
+Files have different classifications {TS, S, C, U}
+
+Clearances & Classifications are ordered in a Domination Lattice:
+	TS
+	|
+	S
+	|
+	C
+	|
+	U
+(TS >= S >= C >= U)
+
+BCP does _not_ enforce this access model for Users, but does for Subjects.
+Malicious Subjects should not be able to change the classification of Objects.
+
+So, Users explicitly choose the clearance of subjects they launch.
+
+Simple Security Property (read):
+	Subjects can read an Object if S.clr >= O.cls
+
+The * (Star) Property (write):
+	Subjects can write an Object if S.clr <= O.cls
+	This is not used in practice, (it's a bad idea!), so usually:
+	Subjects can write an Object if S.clr == O.cls
+
+This is a model to solve the Information Flow problem.
+
+
+Problem:
+	Malicious Subjects can collude to declassify information.
+	By creating & deleting files of a certain name, a malicious subject can create a covert channel over which to send information.
+	
+	Bell-Lapadula does not address security of covert channels.
+	
+Bell Lapadula also does not address security of side channels.
+
+Bell Lapadula can have 'Compartments' (Combinations of clearances & categories)
+
+
+
+
+
+
+
+
+
+
+

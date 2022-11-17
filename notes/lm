@@ -1,0 +1,44 @@
+Text notes for EE5453, Intro to Computer and Network Security
+Lecture lm
+
+Last Time:
+	Intro to IPSec
+	
+	
+IKE-SA uses EDH, which gives PFS
+
+ESP (Encapsulating Security Payload):
+provides confidentiality + integrity of IP Packets
+
+
+
+AH (Authentication Header):
+provides only integrity of IP Packets
+
+
+Transport (H2H):
+	ESP: 
+		Encrypt and MAC IP data (transport header, application header, application data)
+		Add ESP header after IP header
+	AH:
+		MAC IP data & _some_ parts of IP header
+		Add AH header after IP header
+		
+Tunnel (H2F/F2F):
+	ESP:
+		Encrypt + MAC IP packet (IP header, IP data)
+		Add new IP header w/ src/dest address of source/target firewall
+		Add ESP header after new IP header
+	AH:
+		Add new IP header w/ src/dest address of src/dest firewall
+		MAC IP packet (IP header, IP data) & _some_ parts of _new_ IP header
+		
+		
+See slides for exchanges
+
+
+
+
+
+
+
