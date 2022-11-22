@@ -1,0 +1,87 @@
+Text notes for EE5453, Intro to Computer and Network Security
+Lecture p
+
+Last time:
+	MAC
+	Bell-Lapadula
+
+Biba Model:
+	Focused on Integrity.
+	Low integrity should not corrupt subjects | objects.
+	Uses Lattice w/ classifications (like Bell-Lapadula)
+	
+	Idea: Invert Bell-Lapadula security properties.
+	
+	Simple Security Property (Read):
+		CLR(S) <= CLS(O)
+	* Property (Write):
+		CLR(S) >= CLS(O)
+
+
+
+
+DAC is hard to maintain, and MAC is hard to work with, especially in the context of a large coporation.
+
+So Role-Based Access Control (RBAC) was invented.
+
+RBAC has:
+	Roles (R) - ex. {engineer, ceo, pm, employee}
+	Users (U) - ex. {Alice, Bob, Carol}
+	Permissions (P) - ex. {}
+
+P are combininations of O & Rights
+ex. 
+	p1 = {(O1, r), (O2, w)}
+	p2 = {(O1, 2), (O2, w)}
+
+
+Each U has at least one R (User Assignment (UA)):
+	Alice - CEO | Emp
+	Bob - PM | Eng | Emp
+	Carol - Eng | Emp
+
+
+Each R has at least one P (Permission Assignment (PA)):
+	CEO - {p1, p2, p3}
+	Eng - {p1, p5}
+	PM - {p3, p4, p5}
+	Emp - {p6}
+	
+UA (Ex. ): {(u1, r1), (u1, r3)}
+PA (Ex. ): {(r1, p1), (r3, p4)}
+
+To determine authorization of (u1, op1, o1) (u1 wants to do op1 on o1), 
+Find all roles u1 has, use this to find all permissions u1 has through their roles, then look to see if one of their permissions is (o1, op1)
+
+
+When new users appear, only UA needs to be updated
+When new permissions appear, only PA needs to be updated.
+
+So administrators only need to manage UA and PA.
+
+
+Seperation of Duty (SoD):
+	Some roles must be mutually exclusive. This is Static SoD (SSoD)
+	RBAC makes this easy, just add some constraints when managing UA so that users don't have MX roles.
+	
+	DSoD (Dynamic Seperation of Duty) allows users to have MX roles, but does not allow their subjects to have MX roles.
+
+See slides for Sessions, Activation.
+
+SSoD & DSoD are 'just' constraints.
+
+Digital 'break glass' to bypass constraints.
+
+
+ABAC (Attribute Based Access Control) is a generalization of RBAC.
+RBAC Roles are a certain type of ABAC Attributes, other attributes could be groups, status, location, etc.
+Objects also have attributes.
+Write rules to determine if users can access objects based on the attributes of both.
+
+Almost all deployed AC models are ABAC.
+
+Relationship Based AC is used in social networks, (only your friends can access your photos)
+
+
+
+
