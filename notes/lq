@@ -1,0 +1,59 @@
+Text notes for EE5453, Intro to Computer and Network Security
+Lecture q
+
+Case study: Cell Phone Security
+
+GSM: 1982~1986 (Global System for Mobile communications)
+
+In a mobile network: 
+	Mobile Devices
+	Base Stations
+	Home Network (Area Code)
+	Visitor Network (roaming)
+	Base Station Controller (connects to multiple base stations)
+	Public Switched Telephone Network (PSTN, Landline, base stations route over PSTN)
+	
+(See GSM architecture pdf)
+
+
+GSM problems:
+	1. Anonymity - Network observers should not be able to observe IMSI
+	2. Authentication - Only certain IMSIs should be allowed access.
+	3. Confidentiality - Call data should be confidential
+	
+GSM non problems:
+	1. Integrity - don't care
+	2. Authentication - networks do not authenticate to mobile devices
+	
+	
+
+GSM Auth protocol
+
+1. Mobile -> (visited) BS: IMSI
+2. (visited) BS -> (home) BSC: IMSI
+	(home) BSC computes xRES = A3(RAND, Ki) {A3 is a hash function}
+	Kc = A8(RAND2, Ki) {A8 is a different hash function}
+3. (home) BSC -> (visited) BS: <RAND, xRES, Kc>
+4. (visited) BS -> mobile: <RAND, Kc>
+	mobile computes SRES = A3(RAND, Ki)
+5. mobile -> (visited) BS: SRES
+	(visited) BS checks SRES =?= xRES
+	if yes, authenticated, continue
+	if no, not authenticated, stop
+6. Communication can be encrypted with Kc
+
+How well does this work?
+Anonymity? No, IMSI is transmitted in plaintext over the air
+Authentication? Yes in theory, but not really b/c A3 is weak and is broken for collisions
+Confidentiality? No, Kc is transmitted in plaintext over the air. Also, encryption is done using the A# series ciphers, which are weak and easily broken.
+Additionally, the BS can opt out of encryption. This means that attackers can setup their own BS, and always opt out of encryption.
+
+A Fake BS can also act as a MITM.
+
+
+Modern mobile communications have improved a bit, but are still not perfect.
+(Checkout LTEInspector)
+
+
+
+<Overview of Firewalls>
