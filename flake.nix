@@ -20,7 +20,6 @@
             cryptography
             mypy
             python-lsp-server
-            pylsp-mypy
           ]);
           in 
           with pkgs; {
@@ -28,7 +27,7 @@
             buildInputs = [
               openssl
               pkg-config
-              rust-bin.nightly."2022-11-05".default
+              (rust-bin.selectLatestNightlyWith (toolchain: toolchain.default))
               rust-analyzer
               
               pyWPkgs
