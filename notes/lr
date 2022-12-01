@@ -1,0 +1,51 @@
+Text notes for EE5453, Intro to Computer and Network Security
+Lecture r
+
+Last time:
+	GSM
+
+
+<more on firewalls>
+
+<overview of machine learning>
+
+(Some) topics since the midterm:
+
+Authentication Overview
+	Passwords (Something you know) -> H2M
+	Something you are
+	Something you have
+M2M Authentication Protocols
+	Pitfalls
+		Replay
+		Modify
+		Out of Order
+	Challenge-Response
+		Nonce
+		Timestamps
+	Needham-Schroeder
+		KDC
+	Kerberos
+		NS w/ timestamps
+	Otway-Rees
+	Zero-Knowledge Proof
+		Fiat-Shamir-Feige
+	SSL/TLS
+		PKI
+	IPSec
+		IKE
+		AH/ESP
+		Transport/Tunnel modes
+		6 versions of IKE
+Authorization
+	DAC & ACM
+		ACLs
+		CAP list
+	MAC
+		Bell-Lapadula
+		Biba
+	RBAC
+GSM
+Misc:
+	Firewalls
+	ML Security
