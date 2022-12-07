@@ -1,0 +1,11 @@
+---
+title: EE5453 Final Exam
+author: James Ryan
+date: December 6, 2022
+colorlinks: true
+header-includes:
+  - '`\usepackage{algorithm}`{=latex}'
+  - '`\usepackage{algpseudocode}`{=latex}'
+geometry:
+  - margin=1.25in
+---
